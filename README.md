@@ -106,4 +106,4 @@ install.packages("lifecycle")
 install.packages("dplyr")
 ```
 
-As a final point, it is important to remember that recursive dependencies are not considered. In the above example, if `lifecycle` itself was not installing because of its own dependencies not being fulfilled this would require resolution following the same example.
+As a final point, it is important to remember that recursive dependencies are not considered. In the above example, if `lifecycle` itself was not installing because of its own dependencies not being fulfilled this would require resolution following the same method as the example, but for `lifecycle`, (i.e `depend_check("lifecycle")`).

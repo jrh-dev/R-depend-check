@@ -1,12 +1,12 @@
 # `depend_check()` :construction:
 
-A simple function to check dependencies (as specified in the depends & imports sections within a DESCRIPTION file) for an R package and the current installed version.
+A simple function to check dependencies (as specified in the depends & imports sections within a DESCRIPTION file) for an R package and compare to the current installed version of those depndencies.
 
 ## Usage
 
 Copy and run the code within `depend_check.r`, this will create a function `depend_check()` in your global environment.
 
-To check the the dependencies of an R package which is currently available, for example "dplyr";
+Use the function to check the dependencies of an R package which is currently available on CRAN, for example "dplyr";
 
 ```
 > depend_check("dplyr")
@@ -27,17 +27,19 @@ To check the the dependencies of an R package which is currently available, for 
 #' 13     pillar          >=1.5.1             1.6.4   FALSE
 ```
 
-`package` contains the name of a dependency.
-`version_required` specifies the version requirement if one exists.
-`version_installed` specifies the current version of the required package that is installed, if applicable.
-`is_base` specifies whether the required package is a 'base' package. These are not usually updated manually and are tied to the version of R that is being used.
+| data item | description |
+|-----------|-------------|
+| package | Specifies the name of a dependency. |
+| version_required | Specifies the version requirement if one exists. |
+| version_installed | Specifies the current version of the required package that is installed locally, if applicable. |
+| is_base | Specifies whether the required package is a 'base' package. These are not usually updated manually and are tied to the version of R that is being used. |
 
 ## Assumptions & Limitations
 This function does not offer much in the way of customisation, though aims to be simple to use and should fulfil the needs of a majority of R users.
 
 The specified `package` will be sought from the users default CRAN mirror as per the behaviour of `install.packages`. 
 
-`version_installed` returns the version found in the first library where the package is detected. If the user has packages installed in multiple libraries then they are not able to specify the order in which these are searched and the function will follow the order of the libraries returned by `.libPaths()`.
+`version_installed` returns the version of the specified package found in the first library where the package is detected. If the user has packages installed in multiple libraries then they are not able to specify the order in which these are searched and the function will follow the order of the libraries returned by `.libPaths()`.
 
 This function may be useful in resolving errors when trying to install packages, note however, that the documentation of `install.packages()` specifically states "You are advised to run `update.packages` before `install.packages` to ensure that any already installed dependencies have their latest versions.".
 
@@ -45,7 +47,7 @@ Recursive dependencies are not considered.
 
 ## Using `depend_check()` to resolve errors during installation.
 
-Let's try to install the `dplyr` package (version 1.0.10) on a system with the `lifecycle` package (version 1.0.0) installed.
+Let's try to install the `dplyr` package (version 1.0.10) on a system which has the `lifecycle` package (version 1.0.0) already installed.
 
 ```
 install.packages("dplyr")
@@ -70,7 +72,7 @@ Calls: <Anonymous> ... namespaceImportFrom -> asNamespace -> loadNamespace
 Execution halted
 ```
 
-All of the information we need to resolve the issue is contained in the console output, but often this may be incomprehensible to newer users, or during installations with multiple issues it can be difficult to spot the relevant parts of the error.
+All of the information we need to resolve the issue is contained in the console output, but often this may not be obvious to users. During installations with multiple issues it can be also be difficult to spot the relevant parts of the output relating to errors.
 
 Using `depend_check("dplyr")` allows us easily identify the issue.
 

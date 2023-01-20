@@ -1,6 +1,6 @@
 # `depend_check()` :construction:
 
-A simple function to check dependencies (as specified in the depends & imports sections within a DESCRIPTION file) for an R package and compare to the current installed version of those depndencies.
+A simple function to check dependencies (as specified in the depends & imports sections within a DESCRIPTION file) for an R package and compare to the current installed version of those dependencies.
 
 ## Usage
 
@@ -44,6 +44,8 @@ The specified `package` will be sought from the users default CRAN mirror as per
 This function may be useful in resolving errors when trying to install packages, note however, that the documentation of `install.packages()` specifically states "You are advised to run `update.packages` before `install.packages` to ensure that any already installed dependencies have their latest versions.".
 
 Recursive dependencies are not considered.
+
+Only dependencies which are R packages themselves are considered, system dependencies are out of scope.
 
 ## Using `depend_check()` to resolve errors during installation.
 

@@ -74,7 +74,7 @@ Calls: <Anonymous> ... namespaceImportFrom -> asNamespace -> loadNamespace
 Execution halted
 ```
 
-All of the information we need to resolve the issue is contained in the console output, but often this may not be obvious to users. During installations with multiple issues it can be also be difficult to spot the relevant parts of the output relating to errors.
+All of the information we need to resolve the issue is contained in the console output, but often this may not be obvious to users. During installations with multiple issues it can also be difficult to spot the relevant parts of the output relating to errors.
 
 Using `depend_check("dplyr")` allows us easily identify the issue.
 
